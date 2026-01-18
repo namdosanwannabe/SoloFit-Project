@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function Page() {
     return (
-        <div className="flex flex-col gap-4 min-h-svh w-full items-center justify-center p-6 md:p-10">
-            <Image src={Logo} alt="SoloFit Icon" className="w-14 " />
+        <div className="flex flex-col gap-6 min-h-svh w-full items-center justify-start px-6 py-16 md:px-10 md:py-16">
+            <Image src={Logo} alt="SoloFit Icon" className="w-13 text-primary" />
             <div className="flex flex-col items-center justify-center gap-3">
                 <h1 className="text-4xl font-bold">SoloFit</h1>
                 <p className="text-sm text-muted-foreground">

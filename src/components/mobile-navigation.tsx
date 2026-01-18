@@ -55,14 +55,14 @@ export default function MobileNavigation() {
                     const Icon = nav.icon as LucideIcon;
                     const isActive = pathname === nav.path;
                     const activeClass = isActive
-                        ? "text-primary font-medium"
+                        ? "text-primary"
                         : "text-muted-foreground";
 
                     return (
                         <li key={nav.id}>
                             <Link
                                 href={nav.path}
-                                className={`flex flex-col items-center justify-center text-xs ${activeClass} hover:text-primary transition-colors`}
+                                className={`flex flex-col items-center justify-center text-xs font-medium ${activeClass} hover:text-primary transition-colors`}
                             >
                                 <Icon className="w-5 h-5 mb-1" />
                                 {nav.label}

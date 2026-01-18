@@ -18,7 +18,7 @@ export async function UserDetails() {
     );
 }
 
-export default function page() {
+export default function Page() {
     return (
         <Suspense fallback="loading...">
             Routines Page
