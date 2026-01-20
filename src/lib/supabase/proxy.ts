@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { hasEnvVars } from "../utils";
-import { Database } from "./database.types";
+import { Database } from "../../types/database.types";
 
 export async function updateSession(request: NextRequest) {
     const response = NextResponse.next({ request });

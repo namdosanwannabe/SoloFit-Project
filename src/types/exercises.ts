@@ -1,4 +1,3 @@
-
 export type ExerciseWithMuscles = {
     id: string;
     name: string;

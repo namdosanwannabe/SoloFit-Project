@@ -1,42 +1,32 @@
+import ExercisesList from "@/components/exercises/exercises-list";
+import { createQueryClient } from "@/lib/react-query";
 import { createClient } from "@/lib/supabase/server";
-import { ExerciseWithMuscles } from "@/types/exercises";
+import { getExercises } from "@/services/exercises";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { Suspense } from "react";
 
-export default async function Page() {
+async function ExercisesWithData() {
     const supabase = await createClient();
+    const queryClient = createQueryClient();
 
-    const { data, error } = await supabase.from("exercises").select(`
-      id,
-      name,
-      exercise_muscle_groups (
-        muscle_groups ( name )
-      )
-    `);
-
-    if (error) {
-        console.error(error);
-        return <p>Failed to load exercises.</p>;
-    }
-
-    const exercises: ExerciseWithMuscles[] =
-        data?.map((exercise) => ({
-            id: exercise.id,
-            name: exercise.name,
-            muscle_groups:
-                exercise.exercise_muscle_groups?.map(
-                    (emg) => emg.muscle_groups.name,
-                ) ?? [],
-        })) ?? [];
+    // Prefetch on server
+    await queryClient.prefetchQuery({
+        queryKey: ["exercises"],
+        queryFn: () => getExercises(supabase),
+    });
 
     return (
-        <div>
+        <HydrationBoundary state={dehydrate(queryClient)}>
             <h1>Exercises</h1>
-            <ul>
-                {exercises.map((exercise) => (
-                    <li key={exercise.id}>
-                        {exercise.name} - {exercise.muscle_groups.join(", ")}
-                    </li>
-                ))}
-            </ul>
-        </div>
+            <ExercisesList />
+        </HydrationBoundary>
     );
+}
+
+export default function Page() {
+    return (
+        <Suspense fallback="Loading...">
+            <ExercisesWithData />
+        </Suspense>
+    )
 }
