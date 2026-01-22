@@ -12,7 +12,12 @@ export async function getExercises(
       exercise_muscle_groups (
         muscle_groups ( name )
       )
-    `).throwOnError();
+    `)
+        .order("name", {
+            referencedTable: "exercise_muscle_groups.muscle_groups",
+            ascending: true,
+        })
+        .throwOnError();
 
     if (!data) return [];
 

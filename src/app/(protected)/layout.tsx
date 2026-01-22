@@ -7,7 +7,7 @@ export default async function ProtectedLayout({
 }) {
     return (
         <>
-            <main className="min-h-svh flex flex-col gap-3 sm:flex-row p-6 md:p-10">
+            <main className="min-h-svh flex flex-col gap-3 sm:flex-row p-6 md:p-10 bg-zinc-100">
                 {children}
             </main>
             <MobileNavigation />

@@ -1,5 +1,7 @@
 import ExercisesList from "@/components/exercises/exercises-list";
-import { createQueryClient } from "@/lib/react-query";
+import { SpinnerLoader } from "@/components/spinnder-loader";
+import { Input } from "@/components/ui/input";
+import { getQueryClient } from "@/lib/react-query";
 import { createClient } from "@/lib/supabase/server";
 import { getExercises } from "@/services/exercises";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -7,7 +9,7 @@ import { Suspense } from "react";
 
 async function ExercisesWithData() {
     const supabase = await createClient();
-    const queryClient = createQueryClient();
+    const queryClient = getQueryClient();
 
     // Prefetch on server
     await queryClient.prefetchQuery({
@@ -17,7 +19,8 @@ async function ExercisesWithData() {
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
-            <h1>Exercises</h1>
+            <h1 className="text-3xl font-bold">Exercises</h1>
+            <Input id="search-exercises" className="bg-white rounded-xl border-none shadow-none" placeholder="Search exercise" />
             <ExercisesList />
         </HydrationBoundary>
     );
@@ -25,7 +28,7 @@ async function ExercisesWithData() {
 
 export default function Page() {
     return (
-        <Suspense fallback="Loading...">
+        <Suspense fallback={<SpinnerLoader />}>
             <ExercisesWithData />
         </Suspense>
     )

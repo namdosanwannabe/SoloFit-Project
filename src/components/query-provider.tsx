@@ -1,20 +1,8 @@
 "use client";
 
-import { createQueryClient } from "@/lib/react-query";
-import { isServer, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-let browserQueryClient: QueryClient | undefined;
-
-function getQueryClient() {
-    if (isServer) {
-        return createQueryClient();
-    } else {
-        if (!browserQueryClient) {
-            browserQueryClient = createQueryClient();
-        }
-        return browserQueryClient;
-    }
-}
+import { getQueryClient } from "@/lib/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export function ReactQueryClientProvider({
     children,
@@ -26,6 +14,9 @@ export function ReactQueryClientProvider({
     return (
         <QueryClientProvider client={queryClient}>
             {children}
+            <ReactQueryDevtools
+                initialIsOpen={false}
+                buttonPosition="top-right" />
         </QueryClientProvider>
     );
 }

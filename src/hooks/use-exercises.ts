@@ -8,8 +8,5 @@ export function useGetExecises() {
     return useQuery({
         queryKey: ["exercises"],
         queryFn: () => getExercises(supabase),
-        staleTime: 1000 * 60,
-        refetchOnMount: false,
-        refetchOnWindowFocus: false,
     });
 }

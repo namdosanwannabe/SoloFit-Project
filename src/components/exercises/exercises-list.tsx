@@ -3,21 +3,19 @@
 import { useGetExecises } from "@/hooks/use-exercises";
 
 export default function ExercisesList() {
-    const { data: exercises, isPending, isError } = useGetExecises();
-
-    if (isPending) {
-        return <div>Loading exercises...</div>;
-    }
-
-    if (isError) {
-        return <div>Error loading exercises</div>;
-    }
+    const { data: exercises } = useGetExecises();
 
     return (
-        <ul>
+        <ul className="bg-white px-6 py-3 rounded-xl">
             {exercises?.map((exercise) => (
-                <li key={exercise.id}>
-                    {exercise.name} - {exercise.muscle_groups.join(", ")}
+                <li
+                    key={exercise.id}
+                    className="py-3 font-semibold text-lg border-b border-zinc-100 last:border-b-0"
+                >
+                    {exercise.name}
+                    <p className="font-normal text-sm text-muted-foreground">
+                        {exercise.muscle_groups.join(", ")}
+                    </p>
                 </li>
             ))}
         </ul>
