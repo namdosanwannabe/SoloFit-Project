@@ -6,13 +6,15 @@ interface SpinnerLoaderProps {
     size?: 'sm' | 'md' | 'lg'
     overlay?: boolean
     fullscreen?: boolean
+    className?: string
 }
 
 export function SpinnerLoader({
     message,
     size = 'md',
     overlay = false,
-    fullscreen = true,
+    fullscreen = false,
+    className,
 }: SpinnerLoaderProps) {
     const sizeClasses = {
         sm: 'size-6',
@@ -31,7 +33,12 @@ export function SpinnerLoader({
 
     if (fullscreen) {
         return (
-            <div className="fixed inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-50">
+            <div
+                className={cn(
+                    'fixed inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-50',
+                    className
+                )}
+            >
                 {content}
             </div>
         )
@@ -39,11 +46,16 @@ export function SpinnerLoader({
 
     if (overlay) {
         return (
-            <div className="absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-sm rounded-lg">
+            <div
+                className={cn(
+                    'absolute inset-0 flex items-center justify-center bg-background/50 backdrop-blur-sm rounded-lg',
+                    className
+                )}
+            >
                 {content}
             </div>
         )
     }
 
-    return <div className="flex items-center justify-center p-8">{content}</div>
+    return <div className={cn('flex items-center justify-center p-8', className)}>{content}</div>
 }
