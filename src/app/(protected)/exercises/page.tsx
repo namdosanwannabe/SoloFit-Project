@@ -1,3 +1,4 @@
+import ExerciseActionsButton from "@/components/exercises/exercise-actions-button";
 import ExercisesList from "@/components/exercises/exercises-list";
 
 // async function ExercisesWithData() {
@@ -22,6 +23,7 @@ import ExercisesList from "@/components/exercises/exercises-list";
 export default function Page() {
     return (
         <>
+            <ExerciseActionsButton />
             <h1 className="text-3xl font-bold">Exercises</h1>
             <ExercisesList />
         </>

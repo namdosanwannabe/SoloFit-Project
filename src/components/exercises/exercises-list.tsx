@@ -20,11 +20,11 @@ export default function ExercisesList() {
             {isLoading ? (
                 <SpinnerLoader className="m-auto" />
             ) : exercises && exercises.length > 0 ? (
-                <ul className="bg-white px-6 py-3 rounded-xl">
+                <ul className="bg-white px-4 py-2 rounded-xl">
                     {exercises.map((exercise) => (
                         <li
                             key={exercise.id}
-                            className="py-3 font-semibold text-base border-b border-zinc-100 last:border-b-0"
+                            className="py-2 font-medium text-base border-b border-zinc-100 last:border-b-0"
                         >
                             {exercise.name}
                             <p className="font-normal text-sm text-muted-foreground">
